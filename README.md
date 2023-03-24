@@ -8,3 +8,7 @@ To avoid the risk of permanently deleting the dataset on Kaggle, it is recommend
 
 - (Task AR) Weighted F1 score on test set : 98.76% 
 - (Task MI) Binary F1 score on test set : 98.44%
+
+## Demonstration of how to use API
+
+![](https://github.com/saranpan/ECG-Heartbeat-classifier/blob/main/images/demonstrate_AR.gif?raw=true)
