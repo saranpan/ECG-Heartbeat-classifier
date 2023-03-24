@@ -11,10 +11,9 @@ To avoid the risk of permanently deleting the dataset on Kaggle, it is recommend
 
 ## Demonstration of how to use API
 
-The API for both taskes is hosted on https://ecg-heartbeat-ai.onrender.com/
-
-To obtain the predicted output from given task, there are two ways: GET and POST method
-
-The following show how you can do for Task AR
+The API for both taskes is hosted on https://ecg-heartbeat-ai.onrender.com. To obtain the predicted output from given task, there are two ways: GET and POST method
+The following GIF shows how you can do for Task AR using GET method
 
 ![](https://github.com/saranpan/ECG-Heartbeat-classifier/blob/main/images/demonstrate_AR.gif?raw=true)
+
+You can also do via POST method, but make sure the key of the input json is 'beat_input'
