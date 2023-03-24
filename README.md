@@ -6,5 +6,5 @@ To avoid the risk of permanently deleting the dataset on Kaggle, it is recommend
 
 ## Performance of the models
 
-(Task AR) Weighted F1 score on test set : 98.76%
-(Task MI) Binary F1 score on test set : 98.44%
+- (Task AR) Weighted F1 score on test set : 98.76% 
+- (Task MI) Binary F1 score on test set : 98.44%
