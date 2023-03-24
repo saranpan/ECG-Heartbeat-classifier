@@ -38,7 +38,10 @@ def predict(task):
         
     # Retreive the input either POST or GET
     if request.method == 'POST':
-        beat_input = request.form['beat_input']
+        input_json = request.get_json()
+        if 'beat_input' not in input_json:
+            return 'Make sure you have key as "beat_input" in your JSON payload'
+        beat_input = input_json['beat_input']
     else:
         beat_input = request.args.get('beat_input')
     
