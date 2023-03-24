@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ECG Heartbeat Prediction using Flask API</title>
+    <!-- Adding Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5">ECG Heartbeat Prediction using Flask API</h1>
+      <p class="mt-5"> Welcome to the ECG Heartbeat Prediction Flask API. Before proceeding, please read the disclaimer below:</p>
+      <p>Disclaimer: The code and information provided in this Flask API are for educational purposes only. The author is not responsible for any direct or indirect consequences of using this API.</p>
+      <p>To use this API, please follow the instructions below:</p>
+      <ol>
+        <li>Select the task to predict by accessing the URL <a href="https://ecg-heartbeat-ai.onrender.com/predict_ar">https://ecg-heartbeat-ai.onrender.com/predict_ar</a> for predicting arrhythmia or <a href="https://ecg-heartbeat-ai.onrender.com/predict_mi">https://ecg-heartbeat-ai.onrender.com/predict_mi</a> for predicting myocardial infarction. </li>
+        <li>Make a POST or GET request to the selected URL with the input heartbeat data in the form of a list of amplitude values.</li>
+        <li>The input key must be "beat_input" and the value should be the list of amplitude values. For example: /predict_ar?beat_input=[0.4,0.38,0.6]</li>
+        <li>The output will be the predicted label of the input heartbeat data, which can be either "normal" or "abnormal".</li>
+      </ol>
+      <p>Please note that the input heartbeat data must be preprocessed and formatted correctly before making the request to the API. Refer to the code implementation for more details on how to format the input data.</p>
+      <p> To obtain reliable results from an ECG signal, it is necessary to preprocess the signal data using the following steps:</p>
+      <ol>
+        <li>Split the continuous ECG signal to 10s windows and select a 10s window from an ECG signal.</li>
+        <li>Normalize the amplitude values to the range of between zero and one.</li>
+        <li>Find the set of all local maximums based on zerocrossings of the first derivative.</li>
+        <li>Find the set of ECG R-peak candidates by applying a threshold of 0.9 on the normalized value of the local maximums.</li>
+        <li>Find the median of R-R time intervals as the nominal heartbeat period of that window (T).</li>
+        <li>For each R-peak, select a signal part with the length equal to 1.2T.</li>
+      </ol>
+      <p>If the input ECG signal data is longer than 187 samples, the last samples will be truncated. Truncating the input signal data may affect the performance of the model, as some information may be lost. Therefore, it is recommended to use input signals with a length of exactly 187 samples, whenever possible. If the input ECG signal data is shorter than 187 samples, it will be zero-padded to match the expected length of 187. This preprocessing step will not distort the output for this model, as we have verified it.</p>
+      <p>Please note that the preprocessing steps above may need to be modified based on your specific use case and requirements.</p>
+      <p>Additionally, it is important to note that the raw input ECG signal data is not reliable without processing. Therefore, it is necessary to preprocess the ECG signal data using the steps mentioned above to obtain reliable results.</p>
+      <p>The arrhythmia model used in this API can detect the following types of arrhythmia:</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Category</th>
+            <th>Annotations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td>N</td>
+            <td>Normal</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>S</td>
+            <td>Supra-ventricular premature</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>V</td>
+            <td>Ventricular escape</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>F</td>
+            <td>Fusion of ventricular and normal</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Q</td>
+            <td>Unclassifiable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

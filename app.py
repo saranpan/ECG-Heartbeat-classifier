@@ -1,6 +1,6 @@
 import torch
 from utils import import_model, preprocess, predict_ar, predict_mi
-from flask import Flask, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request
 import os
 import ast 
 
@@ -10,7 +10,11 @@ AR_MODEL = import_model('ar',DEVICE) # Arhythmic
 MI_MODEL = import_model('mi',DEVICE) # myocardial infarction
 
 # Setup Flask things
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
+
+@app.route('/')
+def hello():
+    return render_template('hello.html')
 
 @app.route('/predict_<string:task>',methods = ['GET','POST'])
 def predict(task):
@@ -57,5 +61,4 @@ def predict(task):
     return output # change 3 to any integer 
 
 if __name__ == '__main__':
-    # Default PORT : 8080 
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run()
